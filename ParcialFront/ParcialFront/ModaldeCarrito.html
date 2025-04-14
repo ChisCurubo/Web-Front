@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrito de Compras</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: white;
+      padding: 20px;
+      margin: 0;
+    }
+    
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      background-color: white;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      padding: 20px;
+    }
+    
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #e0e0e0;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+    
+    .title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #b2b300;
+    }
+    
+    .close-btn {
+      color: #777;
+      background: none;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    
+    .cart-items {
+      margin-bottom: 20px;
+    }
+    
+    .cart-item {
+      display: flex;
+      flex-wrap: wrap;
+      position: relative;
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+    }
+    
+    .item-img {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+      margin-right: 15px; /* Margen entre la foto y el texto */
+    }
+    
+    .item-details {
+      flex: 1;
+    }
+    
+    .item-name {
+      font-size: 14px;
+      font-weight: 600;
+      margin: 0;
+      padding-right: 20px;
+    }
+    
+    .quantity-control {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+    }
+    
+    .quantity-label {
+      font-size: 14px;
+    }
+    
+    .quantity-input {
+      width: 40px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      text-align: center;
+      margin-left: 10px;
+      padding: 2px;
+    }
+    
+    .item-price {
+      font-size: 14px;
+      font-weight: 600;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      margin: 0;
+    }
+    
+    .remove-btn {
+      color: #777;
+      background: none;
+      border: none;
+      position: absolute;
+      top: 0;
+      right: 0;
+      cursor: pointer;
+    }
+    
+    .summary {
+      border-top: 1px solid #e0e0e0;
+      padding-top: 20px;
+      margin-top: 20px;
+    }
+    
+    .subtotal, .total {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .subtotal {
+      font-size: 14px;
+    }
+    
+    .total {
+      font-size: 18px;
+      font-weight: 600;
+      color: #b2b300;
+    }
+    
+    .total span:last-child {
+      color: black; 
+      font-weight: bold; 
+    }
+    
+    .shipping-info {
+      font-size: 14px;
+      margin-top: 10px;
+      color: #b2b300;
+    }
+    
+    .btn {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 30px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+    
+    .btn-primary {
+      background-color: #b2b300;
+      color: white;
+    }
+    
+    .divider {
+      border: none;
+      border-top: 1px solid #e0e0e0;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 class="title">MI CARRITO (3)</h1>
+      <button class="close-btn">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    
+    <div class="cart-items">
+      <div class="cart-item">
+        <button class="remove-btn">
+          <i class="fas fa-times"></i>
+        </button>
+        <img src="https://storage.googleapis.com/a1aa/image/7nLYAz_blyo8epI4JS0eoWVYyk4vkPMTkIk0Q-MwOto.jpg" alt="Aceite Corporal de Almendras Dulces 500ml" class="item-img">
+        <div class="item-details">
+          <p class="item-name">ACEITE CORPORAL DE ALMENDRAS DULCES 500ML</p>
+          <div class="quantity-control">
+            <span class="quantity-label">Cantidad:</span>
+            <input type="number" value="1" class="quantity-input">
+          </div>
+        </div>
+        <span class="item-price">10,45 €</span>
+      </div>
+      <hr class="divider">
+      
+      <div class="cart-item">
+        <button class="remove-btn">
+          <i class="fas fa-times"></i>
+        </button>
+        <img src="https://storage.googleapis.com/a1aa/image/8eGuNLQW5cvOBqjXEIMpRKs-6UxMoceMJEHFOJJqWpc.jpg" alt="Aceite Antiinflamatorio S.O.S Rescate 30ml" class="item-img">
+        <div class="item-details">
+          <p class="item-name">ACEITE ANTIINFLAMATORIO S.O.S RESCATE 30ML</p>
+          <div class="quantity-control">
+            <span class="quantity-label">Cantidad:</span>
+            <input type="number" value="1" class="quantity-input">
+          </div>
+        </div>
+        <span class="item-price">12,45 €</span>
+      </div>
+      <hr class="divider">
+      
+      <div class="cart-item">
+        <button class="remove-btn">
+          <i class="fas fa-times"></i>
+        </button>
+        <img src="https://storage.googleapis.com/a1aa/image/l5s5LIwMg2rdEzwM8UnAzzmJPjPoNyEtMpn76kQGXWQ.jpg" alt="Parches de Oro de 24 KT Rejuvenecedores para Contorno de Ojos 60uds" class="item-img">
+        <div class="item-details">
+          <p class="item-name">PARCHES DE ORO DE 24 KT REJUVENECEDORES PARA CONTORNO DE OJOS 60UDS</p>
+          <div class="quantity-control">
+            <span class="quantity-label">Cantidad:</span>
+            <input type="number" value="1" class="quantity-input">
+          </div>
+        </div>
+        <span class="item-price">15,50 €</span>
+      </div>
+    </div>
+    
+    <div class="summary">
+      <div class="subtotal">
+        <span>Subtotal</span>
+        <span>38,40 €</span>
+      </div>
+      <hr class="divider">
+      <div class="total">
+        <span>TOTAL (IVA incluido)</span>
+        <span>38,40 €</span>
+      </div>
+      <hr class="divider">
+      <p class="shipping-info">Te faltan 6,60 € para disfrutar del envío gratuito.</p>
+      
+      <div class="buttons">
+        <button class="btn btn-primary">Ir al carrito</button>
+        <button class="btn btn-primary">Realizar pedido</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

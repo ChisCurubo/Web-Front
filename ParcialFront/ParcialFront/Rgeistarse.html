@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear nueva cuenta</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        <h2 class="text-xl font-semibold mb-4">Crear nueva cuenta</h2>
+        <form>
+            <!-- Campos de nombre y apellido -->
+            <div class="mb-4">
+                <input class="w-full p-2 border border-gray-300 rounded bg-gray-100" placeholder="Nombre" type="text">
+            </div>
+            <div class="mb-4">
+                <input class="w-full p-2 border border-gray-300 rounded bg-gray-100" placeholder="Apellido" type="text">
+            </div>
+
+            <!-- Información de inicio de sesión -->
+            <h3 class="text-lg font-semibold mb-4">Información de inicio de sesión</h3>
+            <div class="mb-4">
+                <input class="w-full p-2 border border-gray-300 rounded bg-gray-100" placeholder="Email" type="email">
+            </div>
+            <div class="mb-4">
+                <input class="w-full p-2 border border-gray-300 rounded bg-gray-100" placeholder="Contraseña" type="password">
+                <p class="text-xs text-red-500 mt-1">Su nivel de contraseña: 50 % (media)</p>
+            </div>
+            <div class="mb-4">
+                <input class="w-full p-2 border border-gray-300 rounded bg-gray-100" placeholder="Repita contraseña" type="password">
+            </div>
+            <p class="text-xs text-gray-600 mb-4">La contraseña debe contener al menos una mayúscula y un número.</p>
+
+            <!-- Captcha -->
+            <div class="mb-4 flex items-center">
+                <input class="mr-2" id="not-robot" type="checkbox">
+                <label class="text-sm" for="not-robot">No soy un robot</label>
+                <div class="ml-2">
+                    <img alt="Captcha placeholder" class="border border-gray-300 rounded" height="50" src="https://www.gstatic.com/recaptcha/api2/logo_48.png" width="100">
+                </div>
+            </div>
+
+            <!-- Botones de acción -->
+            <button class="w-full bg-green-500 text-white py-2 rounded-full mb-4" type="submit">Crear cuenta</button>
+            <button class="w-full bg-blue-600 text-white py-2 rounded-full" type="button">Accede con Facebook</button>
+        </form>
+    </div>
+</body>
+</html>

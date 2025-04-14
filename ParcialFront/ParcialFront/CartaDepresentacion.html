@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carta de Presentación para Intercambio Virtual</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Calibri', 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, rgba(240,248,255,1) 0%, rgba(240,255,240,1) 100%);
+            background-attachment: fixed;
+            padding: 30px;
+        }
+        .carta-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header-gradient {
+            background: linear-gradient(135deg, #003366 0%, #006699 100%);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+        .logo {
+            width: 120px;
+            height: auto;
+            margin-bottom: 10px;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        .perfil-academico {
+            border-left: 4px solid #4299e1;
+            background-color: #ebf8ff;
+        }
+        .actividades {
+            border-left: 4px solid #48bb78;
+            background-color: #f0fff4;
+        }
+        .habilidades {
+            border-left: 4px solid #ed8936;
+            background-color: #fffaf0;
+        }
+        .perfil-descripcion {
+            border-left: 4px solid #667eea;
+            background-color: #f7fafc;
+        }
+        .foto-perfil-container {
+            width: 150px;
+            height: 180px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 15px auto;
+            background-color: #f9f9f9;
+            overflow: hidden;
+        }
+        .foto-perfil {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+        .firma-seccion {
+            border-top: 1px solid #e2e8f0;
+            margin-top: 40px;
+            padding-top: 20px;
+        }
+        .lista-habilidades {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        .badge-habilidad {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            background: linear-gradient(135deg, #3182ce 0%, #2c5282 100%);
+            color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .datos-contacto {
+            background-color: #f8fafc;
+            border-radius: 8px;
+            padding: 15px;
+            border-left: 4px solid #3182ce;
+        }
+        .encabezado-seccion {
+            border-bottom: 2px solid #e2e8f0;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            color: #2d3748;
+            font-weight: 600;
+            position: relative;
+        }
+        .encabezado-seccion::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, #3182ce 0%, #90cdf4 100%);
+        }
+    </style>
+</head>
+<body>
+    <div class="carta-container">
+        <div class="header-gradient">
+            <img src="https://universidadesvirtuales.co/logos/original/logo-universidad-pontificia-bolivariana.png" alt="Logo Universidad" class="logo">
+            <h1 class="text-2xl font-bold">Universidad Pontificia Bolivariana</h1>
+            <p class="text-sm">Seccional Bucaramanga</p>
+        </div>
+        
+        <div class="p-6">
+            <!-- Fecha alineada a la izquierda -->
+            <div class="text-left mb-6">
+                <p class="text-gray-600">Bucaramanga, 8 de abril de 2025</p>
+            </div>
+            
+            <div class="flex justify-between items-start">
+                <div class="flex-grow">
+                    <div class="mb-6">
+                        <p class="font-bold">Coordinación de Intercambios Internacionales</p>
+                        <p>Corporación Universitaria Iberoamericana</p>
+                        <p>Atención: Alexandra Córdoba</p>
+                        <p>Correo: alexandra.cordoba@ibero.edu.co</p>
+                    </div>
+                </div>
+                
+                <div class="foto-perfil-container">
+                    <img src="http://127.0.0.1:5500/Fotologo.png" alt="Tu Foto" class="foto-perfil">
+                </div>
+            </div>
+            
+            <div class="text-center mb-6">
+                <h2 class="text-xl font-bold bg-gradient-to-r from-blue-800 to-blue-600 text-white py-2 px-4 rounded-lg">CARTA DE PRESENTACIÓN PARA PROGRAMA DE INTERCAMBIO VIRTUAL</h2>
+            </div>
+            
+            <div class="mb-6">
+                <p class="font-medium">Estimados Señores:</p>
+            </div>
+            
+            <div class="mb-6 text-justify">
+                <p class="mb-4">
+                    Reciban un cordial saludo. Mi nombre es <strong>Fernando Javier Vega Sabino</strong>, estudiante de Ingeniería en Sistemas e Informática (ID 000501008) de la Pontificia Universidad de Bucaramanga, actualmente cursando el sexto semestre y próximo a iniciar el séptimo.
+                </p>
+                
+                <p class="mb-4">
+                    Me dirijo a ustedes con gran entusiasmo para expresar mi interés en participar en el programa de intercambio virtual que ofrece su prestigiosa institución. Considero que esta experiencia enriquecerá significativamente mi formación académica y profesional, permitiéndome adquirir una perspectiva internacional en mi campo de estudio.
+                </p>
+                
+                <div class="perfil-descripcion p-4 rounded-md mb-6">
+                    <p>
+                        Soy un estudiante de Ingeniería en Sistemas e Informática con un sólido desempeño académico y una fuerte pasión por la ciberseguridad, la programación y la inteligencia artificial. Cuento con experiencia en el desarrollo de software, gestión de sistemas Linux, y participación activa en el Semillero de Ciberseguridad de la Universidad Pontificia Bolivariana, Seccional Bucaramanga, donde he podido desarrollar habilidades en liderazgo, trabajo en equipo y resolución de problemas. Me interesa profundizar mis conocimientos en programación, ciberseguridad y nuevas tecnologías como la inteligencia artificial para contribuir al desarrollo de proyectos innovadores informáticos.
+                    </p>
+                </div>
+                
+                <div class="perfil-academico p-4 rounded-md mb-6">
+                    <h3 class="encabezado-seccion text-lg font-bold mb-3">Perfil Académico</h3>
+                    <p>
+                        A lo largo de mi trayectoria universitaria, he mantenido un destacado rendimiento académico con un promedio de <strong>4.35</strong>. Durante los seis semestres cursados hasta ahora, he demostrado mi compromiso con la excelencia al no registrar ninguna inasistencia, reflejando mi responsabilidad y dedicación a mi formación profesional.
+                    </p>
+                </div>
+                
+                <div class="habilidades p-4 rounded-md mb-6">
+                    <h3 class="encabezado-seccion text-lg font-bold mb-3">Habilidades Profesionales</h3>
+                    <div class="lista-habilidades">
+                        <div class="mb-2">
+                            <span class="badge-habilidad">Programación</span>
+                        </div>
+                        <div class="mb-2">
+                            <span class="badge-habilidad">Lógica de Programación</span>
+                        </div>
+                        <div class="mb-2">
+                            <span class="badge-habilidad">Ciberseguridad</span>
+                        </div>
+                        <div class="mb-2">
+                            <span class="badge-habilidad">Linux y Windows</span>
+                        </div>
+                        <div class="mb-2">
+                            <span class="badge-habilidad">Liderazgo</span>
+                        </div>
+                        <div class="mb-2">
+                            <span class="badge-habilidad">Trabajo en equipo</span>
+                        </div>
+                        <div class="mb-2">
+                            <span class="badge-habilidad">Resolución de problemas</span>
+                        </div>
+                        <div class="mb-2">
+                            <span class="badge-habilidad">Comunicación</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="actividades p-4 rounded-md mb-6">
+                    <h3 class="encabezado-seccion text-lg font-bold mb-3">Actividades Extracurriculares y Contribuciones</h3>
+                    <div class="mb-3">
+                        <p class="mb-2">
+                            <strong class="text-green-700">Semillero de Ciberseguridad:</strong> Participo activamente en el semillero de ciberseguridad de la universidad, bajo la supervisión de la profesora Danith Patricia Solorzano Escobar, donde he sobresalido semanalmente en las actividades y proyectos desarrollados. Esta experiencia ha fortalecido mis habilidades técnicas y mi capacidad para trabajar en equipo en proyectos de investigación relacionados con la seguridad informática.
+                        </p>
+                    </div>
+                    
+                    <div>
+                        <p>
+                            <strong class="text-green-700">Compromiso con la Formación Integral:</strong> Actualmente participo en el grupo de misiones de la UPB, lo cual refleja mi compromiso con los valores institucionales y mi interés en contribuir a la formación humanística y al servicio social desde una perspectiva integral, alineada con los principios de nuestra universidad.
+                        </p>
+                    </div>
+                </div>
+                
+                <p class="mb-4">
+                    Estas experiencias han complementado mi formación académica, desarrollando habilidades de liderazgo, compromiso social y trabajo en equipo, fundamentales para mi crecimiento personal y profesional. Mi experiencia en desarrollo de software y gestión de sistemas Linux, combinada con mi interés en nuevas tecnologías como la inteligencia artificial, me permitirán aportar una perspectiva valiosa al programa de intercambio virtual.
+                </p>
+                
+                <p class="mb-4">
+                    Mi motivación para participar en este intercambio radica en la oportunidad de expandir mis horizontes académicos, conocer diferentes metodologías de enseñanza y establecer vínculos con estudiantes de diversas culturas, todo lo cual enriquecerá mi perfil profesional y mi visión global de la ingeniería en sistemas e informática.
+                </p>
+            </div>
+            
+            <div class="mb-6">
+                <p class="mb-3">
+                    Agradezco de antemano su consideración a mi solicitud. Adjunto a esta carta encontrarán mi historial académico (KARDEX) y copia de mi documento de identidad, según lo requerido para el proceso de aplicación.
+                </p>
+                <p class="mb-3">
+                    Quedo atento a cualquier información adicional que requieran y espero con entusiasmo la posibilidad de formar parte de este valioso programa de intercambio.
+                </p>
+                <p>
+                    Atentamente,
+                </p>
+            </div>
+            
+            <div class="firma-seccion pt-6">
+                <p class="mb-1 font-bold">__________________________</p>
+                <p class="font-bold">Fernando Javier Vega Sabino</p>
+                <div class="datos-contacto mt-3">
+                    <p class="mb-1">ID Estudiantil: 000501008</p>
+                    <p class="mb-1">Programa: Ingeniería en Sistemas e Informática</p>
+                    <p class="mb-1">Semestre: Séptimo (próximo a cursar)</p>
+                    <p class="mb-1">Correo electrónico: fernando.vega@example.com</p>
+                    <p class="mb-1">Teléfono: +57 3157419040</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

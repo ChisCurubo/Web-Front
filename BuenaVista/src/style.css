@@ -1,0 +1,19 @@
+:root {
+    /* Verdes */
+    --green-darkest: #006414;
+    --green-darker:  #009929;
+    --green-light:   #5ccb5f;
+    --green-nav: #26a848;
+  
+    /* Rojos */
+    --red-primary:   #e80729;
+    --red-secondary: #ef2947;
+  
+    /* Amarillos / Naranjas */
+    --orange-primary:  #efa229;
+    --orange-secondary:#f3b24a;
+}
+  
+.navbar-custom {
+background-color: var(--green-nav) !important;
+}

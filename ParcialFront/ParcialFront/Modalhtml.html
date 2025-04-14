@@ -1,0 +1,57 @@
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        .icon-outline {
+            color: white;           /* Color de relleno blanco */
+            -webkit-text-stroke: 1px black;  /* Borde negro (Chrome/Safari) */
+            text-stroke: 1px black;          /* Borde negro (futuro estándar) */
+        }
+        
+        li {
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        
+        li:hover {
+            background-color: #f8f9fa;
+            transform: translateX(2px);
+        }
+        
+        li:hover i {
+            color: #5ccb5f;  /* Cambiado de #3b82f6 a #5ccb5f */
+        }
+        
+        .icon-outline:hover {
+            -webkit-text-stroke: 1px #5ccb5f;  /* Cambiado de #3b82f6 a #5ccb5f */
+            text-stroke: 1px #5ccb5f;          /* Cambiado de #3b82f6 a #5ccb5f */
+        }
+    </style>
+</head>
+<body style="display: flex; align-items: center; justify-content: center; min-height: 100vh; background-color: #f3f4f6;">
+    <div style="background-color: white; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); border-radius: 0.5rem; width: 16rem;">
+        <ul style="list-style: none; padding: 0; margin: 0; border-top: 1px solid #e5e7eb;">
+            <li style="display: flex; align-items: center; padding: 1rem; border-bottom: 1px solid #e5e7eb;">
+                <i class="fas fa-user" style="margin-right: 0.75rem;"></i>
+                <span>Mi Cuenta</span>
+            </li>
+            <li style="display: flex; align-items: center; padding: 1rem; border-bottom: 1px solid #e5e7eb;">
+                <i class="fas fa-heart icon-outline" style="margin-right: 0.75rem;"></i>
+                <span>Mis Favoritos</span>
+            </li>
+            <li style="display: flex; align-items: center; padding: 1rem; border-bottom: 1px solid #e5e7eb;">
+                <i class="fas fa-check" style="margin-right: 0.75rem;"></i>
+                <span>Mi Carrito</span>
+            </li>
+            <li style="display: flex; align-items: center; padding: 1rem; border-bottom: 1px solid #e5e7eb;">
+                <i class="fas fa-lock icon-outline" style="margin-right: 0.75rem;"></i>
+                <span>Entrar</span>
+            </li>
+            <li style="display: flex; align-items: center; padding: 1rem;">
+                <i class="fas fa-user-plus" style="margin-right: 0.75rem;"></i>
+                <span>Crear una Cuenta</span>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda Online</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Estilos para el logo y barra superior */
+        .top-bar {
+            display: flex;
+            align-items: center;
+            padding: 10px 16px;
+            background-color: white;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .logo {
+            height: 40px;
+            width: auto;
+            margin-right: 20px;
+        }
+
+        /* Estilos para la barra de búsqueda e íconos */
+        .search-container {
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
+            border: 1px solid #d1d5db;
+            border-radius: 9999px; /* Full rounded */
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 8px 16px;
+            color: #4b5563; /* gray-600 */
+            background-color: transparent;
+            border: none;
+            outline: none;
+        }
+
+        .search-button {
+            color: #b2b300; /* Custom color */
+            padding: 8px 16px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .icons-container {
+            display: flex;
+            align-items: center;
+            gap: 24px; /* Espacio entre íconos */
+            margin-left: 16px; /* Separación de la barra de búsqueda */
+        }
+
+        /* Estilos para los productos */
+        .product-card {
+            transition: all 0.3s ease; /* Transición suave para hover */
+        }
+
+        /* --- MODIFICACIÓN CLAVE --- */
+        /* Ocultar botón y corazón por defecto */
+        .add-to-cart,
+        .heart-icon {
+            opacity: 0; /* Start fully transparent */
+            transition: opacity 0.3s ease; /* Smooth fade-in */
+        }
+
+        /* Mostrar botón y corazón al hacer hover sobre la tarjeta */
+        .product-card:hover .add-to-cart,
+        .product-card:hover .heart-icon {
+            opacity: 1; /* Fade to fully visible */
+        }
+
+        /* Efecto de escala y sombra en hover */
+        .product-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Estilo para el botón añadir al carrito */
+        .add-to-cart {
+            width: 100%;
+            margin-top: 8px;
+        }
+
+        /* Estilos para el filtro de precios */
+        .price-filter {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-right: 1.5rem;
+            width: 280px;
+            transition: width 0.3s ease, padding 0.3s ease, margin 0.3s ease; /* Added transitions */
+            overflow: hidden; /* Hide content smoothly */
+            flex-shrink: 0; /* Prevent shrinking when content wraps */
+        }
+
+        /* --- Slider style uses #b2b300 already --- */
+        .price-range-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 4px;
+            background: #d1d5db; /* Lighter gray background for the track */
+            outline: none;
+            margin: 1rem 0;
+            border-radius: 2px;
+        }
+
+        .price-range-slider::-webkit-slider-runnable-track {
+          background: #b2b300; /* Color for the track */
+          height: 4px;
+          border-radius: 2px;
+        }
+
+        .price-range-slider::-moz-range-track {
+          background: #b2b300; /* Color for the track */
+          height: 4px;
+          border-radius: 2px;
+        }
+
+        .price-range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #b2b300; /* Custom color for thumb */
+            cursor: pointer;
+            margin-top: -6px; /* Adjust thumb position vertically */
+        }
+
+         .price-range-slider::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #b2b300; /* Custom color for thumb */
+            cursor: pointer;
+            border: none; /* Remove default border */
+        }
+
+        .price-inputs {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .price-input {
+            flex: 1;
+            padding: 0.5rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.25rem;
+            text-align: center;
+        }
+
+        .main-content {
+            display: flex;
+            flex-wrap: nowrap; /* Prevent filter from wrapping below products */
+            padding: 1rem;
+        }
+
+        /* --- COLLAPSIBLE SIDEBAR STYLES --- */
+        .price-filter.collapsed {
+            /* Adjust width/padding when collapsed - Optional, hiding content is main goal */
+             /* width: 60px; /* Example: Just enough for the icon */
+             /* padding-left: 1rem; */
+             /* padding-right: 1rem; */
+             /* margin-right: 0.5rem; */
+             padding-bottom: 1rem; /* Keep padding for header */
+        }
+        .price-filter.collapsed #priceFilterContent {
+            display: none; /* Hide the content */
+        }
+        #toggleSidebarIcon {
+            cursor: pointer; /* Make icon clickable */
+            transition: transform 0.3s ease; /* Smooth icon rotation */
+        }
+        .price-filter.collapsed #toggleSidebarIcon {
+           /* transform: rotate(180deg); /* Optional: Rotate icon */
+        }
+        /* --- END COLLAPSIBLE SIDEBAR STYLES --- */
+
+        /* Responsive: Móvil (≤ 768px - Adjusted breakpoint) */
+        @media (max-width: 768px) {
+            .main-content {
+                 flex-direction: column; /* Stack filter and products vertically */
+                 flex-wrap: wrap; /* Allow wrapping again */
+            }
+
+            .price-filter {
+                width: 100%; /* Full width on small screens */
+                margin-right: 0;
+                margin-bottom: 1.5rem;
+            }
+             /* Keep collapsed state functional */
+            .price-filter.collapsed {
+                width: 100%; /* Maintain full width even when collapsed */
+                padding-bottom: 1rem; /* Ensure header space */
+            }
+        }
+
+         /* Responsive: Mobile Top Bar (≤ 400px) */
+         @media (max-width: 400px) {
+             .top-bar {
+                 flex-direction: column;
+                 align-items: center;
+                 padding: 10px;
+             }
+
+             .logo {
+                 margin: 0 0 10px 0;
+                 height: 50px;
+                 width: auto;
+                 max-width: 100%;
+             }
+
+             .nav-container {
+                 flex-direction: column;
+                 align-items: center;
+                 width: 100%;
+             }
+
+             .search-container {
+                 width: 100%;
+                 margin-bottom: 10px;
+             }
+
+             .icons-container {
+                 margin-left: 0;
+                 gap: 15px;
+             }
+         }
+    </style>
+</head>
+<body class="bg-white text-gray-800">
+    <div class="top-bar">
+        <img src="logo.jpg" alt="Logo de la tienda" class="logo">
+
+        <div class="nav-container" style="display: flex; align-items: center; width: 100%;">
+            <div class="search-container">
+                <input type="text" placeholder="¿Qué producto estás buscando...?" class="search-input">
+                <button class="search-button">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            <div class="icons-container">
+                 <div class="icon-item" style="display: flex; flex-direction: column; align-items: center; color: #b2b300; cursor: pointer;">
+                     <i class="far fa-heart"></i>
+                     <span style="font-size: 12px; margin-top: 4px;">Mis Favoritos</span>
+                 </div>
+                 <div class="icon-item" style="display: flex; flex-direction: column; align-items: center; color: #b2b300; cursor: pointer;">
+                     <i class="fas fa-user"></i>
+                     <span style="font-size: 12px; margin-top: 4px;">Mi Cuenta</span>
+                 </div>
+                 <div class="icon-item" style="display: flex; flex-direction: column; align-items: center; color: #b2b300; cursor: pointer;">
+                     <i class="fas fa-shopping-cart"></i>
+                     <span style="font-size: 12px; margin-top: 4px;">Mi Carrito</span>
+                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="price-filter" id="priceFilterSidebar">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-semibold">Precio</h2>
+                <i class="fas fa-minus" id="toggleSidebarIcon"></i>
+            </div>
+            <div id="priceFilterContent">
+                <input type="range" min="1" max="82" value="40" class="price-range-slider" id="priceSlider">
+                <div class="flex justify-between mb-4 space-x-2">
+                    <div class="text-center w-1/2">
+                        <p class="text-sm font-semibold">DESDE</p>
+                        <div class="mt-2 p-2 bg-gray-100 rounded-md">
+                            <p class="text-lg font-semibold">1 €</p> </div>
+                    </div>
+                    <div class="text-center w-1/2">
+                        <p class="text-sm font-semibold">HASTA</p>
+                        <div class="mt-2 p-2 bg-gray-100 rounded-md">
+                            <p class="text-lg font-semibold">82 €</p> </div>
+                    </div>
+                </div>
+                 <button class="w-full py-2 bg-[#b2b300] text-white font-semibold rounded-full">Filtrar</button>
+             </div>
+        </div>
+
+        <div class="flex-1">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+
+                <div class="text-center product-card relative border border-gray-200 rounded-lg p-4">
+                     <img alt="Parches de Oro de 24 kt. Rejuvenecedores para Contorno de Ojos" class="mx-auto mb-2" height="150"
+                          src="https://storage.googleapis.com/a1aa/image/z8YiJcELWz5r77jJB1NRplu-TpPqzorbvd23X9YNzsk.jpg" width="150"/>
+                     <p class="text-sm min-h-[40px]">Parches de Oro de 24 kt. Rejuvenecedores para Contorno de Ojos</p>
+                     <p class="text-lg font-bold text-[#b2b300]">11,50 €</p> <button class="add-to-cart bg-[#efa229] text-white px-4 py-2 rounded-full w-full">
+                         <i class="fas fa-cart-plus text-white mr-2"></i> Añadir la cesta
+                     </button>
+                     <i class="heart-icon fas fa-heart text-red-500 absolute top-2 right-2 cursor-pointer"></i>
+                 </div>
+
+                 <div class="text-center product-card relative border border-gray-200 rounded-lg p-4">
+                     <img alt="Parches Iluminadores" class="mx-auto mb-2" height="150"
+                          src="https://storage.googleapis.com/a1aa/image/iBS7sEsLyjm4eKO9CQ1aP4Zhdl170C7nR5YLvwGYGRw.jpg" width="150"/>
+                     <p class="text-sm min-h-[40px]">Parches Iluminadores</p>
+                     <p class="text-lg font-bold text-[#b2b300]">15,50 €</p> <button class="add-to-cart bg-[#efa229] text-white px-4 py-2 rounded-full w-full">
+                         <i class="fas fa-cart-plus text-white mr-2"></i> Añadir al carrito
+                     </button>
+                     <i class="heart-icon fas fa-heart text-red-500 absolute top-2 right-2 cursor-pointer"></i>
+                 </div>
+
+                 <div class="text-center product-card relative border border-gray-200 rounded-lg p-4">
+                     <img alt="Parches Supertox" class="mx-auto mb-2" height="150"
+                          src="https://storage.googleapis.com/a1aa/image/1eVJLXcoGq0Csrc9fxlK8iAxGy84gYkLDJIPkh-0uwU.jpg" width="150"/>
+                     <p class="text-sm min-h-[40px]">Parches Supertox</p>
+                     <p class="text-lg font-bold text-[#b2b300]">15,50 €</p> <button class="add-to-cart bg-[#efa229] text-white px-4 py-2 rounded-full w-full">
+                         <i class="fas fa-cart-plus text-white mr-2"></i> Añadir al carrito
+                     </button>
+                     <i class="heart-icon fas fa-heart text-red-500 absolute top-2 right-2 cursor-pointer"></i>
+                 </div>
+
+                 <div class="text-center product-card relative border border-gray-200 rounded-lg p-4">
+                     <img alt="6 Discos Desmaquillantes" class="mx-auto mb-2" height="150"
+                          src="https://storage.googleapis.com/a1aa/image/UZmp3K13zKhgrSTvFQML8IRr6CkD9LTp-XOSYA7C3-U.jpg" width="150"/>
+                     <p class="text-sm min-h-[40px]">6 Discos Desmaquillantes</p>
+                     <p class="text-lg font-bold text-[#b2b300]">15,50 €</p> <button class="add-to-cart bg-[#efa229] text-white px-4 py-2 rounded-full w-full">
+                         <i class="fas fa-cart-plus text-white mr-2"></i> Añadir al carrito
+                     </button>
+                     <i class="heart-icon fas fa-heart text-red-500 absolute top-2 right-2 cursor-pointer"></i>
+                 </div>
+
+                  <div class="text-center product-card relative border border-gray-200 rounded-lg p-4">
+                     <img alt="Aceite antiestrías" class="mx-auto mb-2" height="150"
+                          src="https://storage.googleapis.com/a1aa/image/2aJkTG_B0gd65-fh3TmHqqHpYGv4waFySrJ2mEFRHH0.jpg" width="150"/>
+                     <p class="text-sm min-h-[40px]">Aceite antiestrías</p>
+                     <p class="text-lg font-bold text-[#b2b300]">33,00 €</p> <button class="add-to-cart bg-[#efa229] text-white px-4 py-2 rounded-full w-full">
+                         <i class="fas fa-cart-plus text-white mr-2"></i> Añadir al carrito
+                     </button>
+                     <i class="heart-icon fas fa-heart text-red-500 absolute top-2 right-2 cursor-pointer"></i>
+                 </div>
+
+                  <div class="text-center product-card relative border border-gray-200 rounded-lg p-4">
+                     <img alt="Aceite antinflamatorio" class="mx-auto mb-2" height="150"
+                          src="https://storage.googleapis.com/a1aa/image/AYAYTuFD91U-IhirbwLwl1ZGjXlhxVKTnYfoGKbWKDI.jpg" width="150"/>
+                     <p class="text-sm min-h-[40px]">Aceite antinflamatorio</p>
+                     <p class="text-lg font-bold text-[#b2b300]">15,50 €</p> <button class="add-to-cart bg-[#efa229] text-white px-4 py-2 rounded-full w-full">
+                         <i class="fas fa-cart-plus text-white mr-2"></i> Añadir al carrito
+                     </button>
+                     <i class="heart-icon fas fa-heart text-red-500 absolute top-2 right-2 cursor-pointer"></i>
+                 </div>
+
+                  <div class="text-center product-card relative border border-gray-200 rounded-lg p-4">
+                     <img alt="Aceite Bucal de Coco" class="mx-auto mb-2" height="150"
+                          src="https://storage.googleapis.com/a1aa/image/thWwE0dvzhOjh-9lXqgGBnOHWpCfe7emz2gwIP1WEyY.jpg" width="150"/>
+                     <p class="text-sm min-h-[40px]">Aceite Bucal de Coco</p>
+                     <p class="text-lg font-bold text-[#b2b300]">15,50 €</p> <button class="add-to-cart bg-[#efa229] text-white px-4 py-2 rounded-full w-full">
+                         <i class="fas fa-cart-plus text-white mr-2"></i> Añadir al carrito
+                     </button>
+                     <i class="heart-icon fas fa-heart text-red-500 absolute top-2 right-2 cursor-pointer"></i>
+                 </div>
+
+                  <div class="text-center product-card relative border border-gray-200 rounded-lg p-4">
+                     <img alt="Aceite capilar de..." class="mx-auto mb-2" height="150"
+                          src="https://storage.googleapis.com/a1aa/image/ARVxoPdKwbqpJJ8GiXIf4RMpiSidXbdprD70C9sBC2g.jpg" width="150"/>
+                     <p class="text-sm min-h-[40px]">Aceite capilar de...</p>
+                     <p class="text-lg font-bold text-[#b2b300]">15,50 €</p> <button class="add-to-cart bg-[#efa229] text-white px-4 py-2 rounded-full w-full">
+                         <i class="fas fa-cart-plus text-white mr-2"></i> Añadir al carrito
+                     </button>
+                     <i class="heart-icon fas fa-heart text-red-500 absolute top-2 right-2 cursor-pointer"></i>
+                 </div>
+
+                  <div class="text-center product-card relative border border-gray-200 rounded-lg p-4">
+                     <img alt="Aceite corporal R..." class="mx-auto mb-2" height="150"
+                          src="https://storage.googleapis.com/a1aa/image/SEUZKtjkKI8RG0zkX3XvZk3gd2RE8xdm7DVLav3gFFs.jpg" width="150"/>
+                     <p class="text-sm min-h-[40px]">Aceite corporal R...</p>
+                     <p class="text-lg font-bold text-[#b2b300]">15,50 €</p> <button class="add-to-cart bg-[#efa229] text-white px-4 py-2 rounded-full w-full">
+                         <i class="fas fa-cart-plus text-white mr-2"></i> Añadir al carrito
+                     </button>
+                     <i class="heart-icon fas fa-heart text-red-500 absolute top-2 right-2 cursor-pointer"></i>
+                 </div>
+
+                  <div class="text-center product-card relative border border-gray-200 rounded-lg p-4">
+                     <img alt="Aceite corporal R..." class="mx-auto mb-2" height="150"
+                          src="https://storage.googleapis.com/a1aa/image/SEUZKtjkKI8RG0zkX3XvZk3gd2RE8xdm7DVLav3gFFs.jpg" width="150"/>
+                     <p class="text-sm min-h-[40px]">Aceite corporal R...</p>
+                     <p class="text-lg font-bold text-[#b2b300]">73,70 €</p> <button class="add-to-cart bg-[#efa229] text-white px-4 py-2 rounded-full w-full">
+                         <i class="fas fa-cart-plus text-white mr-2"></i> Añadir al carrito
+                     </button>
+                     <i class="heart-icon fas fa-heart text-red-500 absolute top-2 right-2 cursor-pointer"></i>
+                 </div>
+
+                  <div class="text-center product-card relative border border-gray-200 rounded-lg p-4">
+                     <img alt="Aceite corporal R..." class="mx-auto mb-2" height="150"
+                          src="https://storage.googleapis.com/a1aa/image/SEUZKtjkKI8RG0zkX3XvZk3gd2RE8xdm7DVLav3gFFs.jpg" width="150"/>
+                     <p class="text-sm min-h-[40px]">Aceite corporal R...</p>
+                     <p class="text-lg font-bold text-[#b2b300]">15,50 €</p> <button class="add-to-cart bg-[#efa229] text-white px-4 py-2 rounded-full w-full">
+                         <i class="fas fa-cart-plus text-white mr-2"></i> Añadir al carrito
+                     </button>
+                     <i class="heart-icon fas fa-heart text-red-500 absolute top-2 right-2 cursor-pointer"></i>
+                 </div>
+
+                  <div class="text-center product-card relative border border-gray-200 rounded-lg p-4">
+                     <img alt="Aceite corporal R..." class="mx-auto mb-2" height="150"
+                          src="https://storage.googleapis.com/a1aa/image/SEUZKtjkKI8RG0zkX3XvZk3gd2RE8xdm7DVLav3gFFs.jpg" width="150"/>
+                     <p class="text-sm min-h-[40px]">Aceite corporal R...</p>
+                     <p class="text-lg font-bold text-[#b2b300]">14,95 €</p> <button class="add-to-cart bg-[#efa229] text-white px-4 py-2 rounded-full w-full">
+                         <i class="fas fa-cart-plus text-white mr-2"></i> Añadir al carrito
+                     </button>
+                     <i class="heart-icon fas fa-heart text-red-500 absolute top-2 right-2 cursor-pointer"></i>
+                 </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Wait for the DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get references to the elements
+            const sidebar = document.getElementById('priceFilterSidebar');
+            const toggleIcon = document.getElementById('toggleSidebarIcon');
+            // const content = document.getElementById('priceFilterContent'); // Not strictly needed if using class on sidebar
+
+            // Check if elements exist before adding listener
+            if (sidebar && toggleIcon) {
+                toggleIcon.addEventListener('click', function() {
+                    // Toggle the 'collapsed' class on the sidebar element
+                    sidebar.classList.toggle('collapsed');
+
+                    // Change the icon based on the collapsed state
+                    if (sidebar.classList.contains('collapsed')) {
+                        // If sidebar IS collapsed, change icon to 'plus'
+                        toggleIcon.classList.remove('fa-minus');
+                        toggleIcon.classList.add('fa-plus');
+                    } else {
+                        // If sidebar IS NOT collapsed, change icon back to 'minus'
+                        toggleIcon.classList.remove('fa-plus');
+                        toggleIcon.classList.add('fa-minus');
+                    }
+                });
+            } else {
+                console.error("Sidebar or toggle icon element not found!");
+            }
+        });
+    </script>
+
+</body>
+</html>

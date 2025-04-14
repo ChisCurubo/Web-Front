@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda Online - Parches Iluminadores</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Estilos generales */
+        body {
+            background-color: white;
+            color: #1f2937; /* Equivalente a text-gray-800 */
+            font-family: sans-serif; /* Añadido para una mejor base */
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Estilos para el logo y barra superior (originales) */
+        .top-bar {
+            display: flex;
+            align-items: center;
+            padding: 10px 16px;
+            background-color: white;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .logo {
+            height: 40px;
+            width: auto;
+            margin-right: 20px;
+        }
+
+        /* Contenedor de navegación y búsqueda */
+        .nav-container {
+             display: flex;
+             align-items: center;
+             width: 100%;
+        }
+
+        /* Estilos para la barra de búsqueda e íconos (originales) */
+        .search-container {
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
+            border: 1px solid #d1d5db;
+            border-radius: 9999px;
+            margin-right: 16px; /* Espacio antes de los iconos */
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 8px 16px;
+            color: #4b5563;
+            background-color: transparent;
+            border: none;
+            outline: none;
+            font-size: 1rem; /* Tamaño base */
+        }
+
+        .search-button {
+            color: #b2b300;
+            padding: 8px 16px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Contenedor de iconos */
+        .icons-container {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            margin-left: 16px; /* Reemplaza el ml-16 anterior */
+        }
+
+        /* Estilo para cada icono y texto */
+         .icon-item {
+             display: flex;
+             flex-direction: column;
+             align-items: center;
+             color: #b2b300;
+             cursor: pointer;
+             text-align: center;
+         }
+         .icon-item i {
+             font-size: 1.25rem; /* Tamaño aproximado del icono */
+         }
+         .icon-item span {
+             font-size: 12px;
+             margin-top: 4px;
+         }
+
+        /* Contenido Principal */
+        .main-content {
+            max-width: 72rem; /* max-w-6xl */
+            margin-left: auto;
+            margin-right: auto;
+            padding: 1.5rem; /* p-6 */
+        }
+
+        .product-layout {
+            display: flex;
+            flex-direction: column; /* Default */
+            align-items: flex-start; /* items-start */
+            gap: 2rem; /* gap-8 */
+        }
+
+        .image-column {
+             width: 100%; /* w-full */
+             display: flex; /* flex */
+             justify-content: center; /* justify-center */
+        }
+
+        .product-image {
+            border-radius: 0.5rem; /* rounded-lg */
+            width: 100%; /* w-full */
+            max-width: 28rem; /* max-w-md */
+            display: block; /* Asegura que la imagen no tenga espacio extra debajo */
+        }
+
+        .info-column {
+            width: 100%; /* w-full */
+            margin-top: 1rem; /* mt-4 */
+        }
+        /* Estilo para simular space-y-6 */
+        .info-column > * + * {
+             margin-top: 1.5rem; /* space-y-6 */
+        }
+
+        .product-title {
+            font-size: 1.875rem; /* text-3xl */
+            line-height: 2.25rem;
+            font-weight: 700; /* font-bold */
+            margin: 0; /* Resetear margen por defecto del h1 */
+        }
+
+        .product-units {
+            color: #6b7280; /* text-gray-500 */
+            font-size: 1.125rem; /* text-lg */
+            line-height: 1.75rem;
+            margin: 0; /* Resetear margen por defecto del p */
+        }
+
+        .price-container {
+             display: flex; /* flex */
+             flex-direction: column; /* ¡NUEVO! Apila los elementos verticalmente */
+             align-items: flex-start; /* ¡CAMBIADO! Alinea a la izquierda (en lugar de baseline) */
+             /* gap: 1rem; */ /* Eliminamos o ajustamos el gap, ya que ahora es vertical */
+             gap: 0.25rem; /* Opcional: Añade un pequeño espacio vertical si lo deseas */
+        }
+
+        .main-price {
+            color: #b2b300; /* text-[#b2b300] */
+            font-size: 2.25rem; /* text-4xl */
+            line-height: 2.5rem;
+            font-weight: 700; /* font-bold */
+            margin: 0;
+        }
+        /* La clase .product-units se reutiliza para el precio por unidad */
+
+        .product-description {
+            font-size: 1.125rem; /* text-lg */
+            line-height: 1.75rem;
+        }
+         /* Estilo para simular space-y-4 */
+        .product-description > * + * {
+             margin-top: 1rem; /* space-y-4 */
+        }
+
+        .description-text {
+            color: #374151; /* text-gray-700 */
+            margin: 0; /* Resetear margen por defecto del p */
+        }
+
+        .actions-container {
+             display: flex; /* flex */
+             align-items: center; /* items-center */
+             margin-top: 2rem; /* mt-8 */
+        }
+
+        .quantity-selector {
+            display: flex; /* flex */
+            align-items: center; /* items-center */
+            border: 1px solid #d1d5db; /* border border-gray-300 */
+            border-radius: 0.5rem; /* rounded-lg */
+        }
+
+        .quantity-button {
+            padding-left: 1rem; /* px-4 */
+            padding-right: 1rem;
+            padding-top: 0.5rem; /* py-2 */
+            padding-bottom: 0.5rem;
+            font-size: 1.25rem; /* text-xl */
+            line-height: 1.75rem;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            transition: background-color 150ms ease-in-out; /* transition-colors */
+        }
+        .quantity-button:hover {
+             background-color: #f3f4f6; /* hover:bg-gray-100 */
+        }
+        /* Asegurar que los botones no hereden el borde redondeado del contenedor */
+        .quantity-button:first-child {
+            border-top-left-radius: 0.5rem;
+            border-bottom-left-radius: 0.5rem;
+        }
+        .quantity-button:last-child {
+            border-top-right-radius: 0.5rem;
+            border-bottom-right-radius: 0.5rem;
+        }
+
+        .quantity-input {
+            width: 4rem; /* w-16 */
+            text-align: center; /* text-center */
+            font-size: 1.25rem; /* text-xl */
+            line-height: 1.75rem;
+            border-left: 1px solid #d1d5db; /* border-x border-gray-300 */
+            border-right: 1px solid #d1d5db;
+            border-top: none;
+            border-bottom: none;
+            padding-top: 0.5rem; /* py-2 */
+            padding-bottom: 0.5rem;
+            background-color: transparent;
+            outline: none;
+        }
+
+        .add-to-cart-button {
+            /* margin-left: 4rem; */ /* Comentamos o eliminamos el valor anterior */
+            margin-left: 15rem; /* NUEVO VALOR para más separación */
+            background-color: #efa229;
+            color: white;
+            padding-left: 2.5rem;
+            padding-right: 2.5rem;
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
+            border-radius: 9999px;
+            font-size: 1.125rem;
+            line-height: 1.75rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            border: none;
+            cursor: pointer;
+            transition: background-color 150ms ease-in-out;
+        }
+        .add-to-cart-button:hover {
+            background-color: #d18f22; /* hover:bg-[#d18f22] */
+        }
+
+        .cart-icon-button {
+             margin-right: 0.75rem; /* mr-3 */
+             /* color: white; Ya heredado del botón */
+        }
+
+
+        /* Responsive: Mobile Top Bar (≤ 400px) - Original */
+        @media (max-width: 400px) {
+            .top-bar {
+                flex-direction: column;
+                align-items: center;
+                padding: 10px;
+            }
+
+            .logo {
+                margin: 0 0 10px 0;
+                height: 50px;
+                width: auto;
+                max-width: 100%;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+            }
+
+            .search-container {
+                width: 100%;
+                margin-bottom: 10px;
+                margin-right: 0; /* Quitar margen en móvil */
+            }
+
+            .icons-container {
+                margin-left: 0;
+                gap: 15px;
+                 /* Asegurar que los iconos se muestren bien en fila */
+                justify-content: center;
+                width: 100%;
+                margin-top: 10px;
+            }
+        }
+
+        /* Responsive: Layout md (≥ 768px) - Replicando Tailwind */
+         @media (min-width: 768px) { /* Punto de corte 'md' de Tailwind */
+             .product-layout {
+                 flex-direction: row; /* md:flex-row */
+             }
+             .image-column {
+                 width: 40%; /* md:w-2/5 */
+             }
+             .info-column {
+                 width: 60%; /* md:w-3/5 */
+                 margin-top: 0; /* md:mt-0 */
+             }
+         }
+
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <img src="logo.jpg" alt="Logo de la tienda" class="logo">
+
+        <div class="nav-container">
+            <div class="search-container">
+                <input type="text" placeholder="¿Qué producto estás buscando...?" class="search-input">
+                <button class="search-button">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            <div class="icons-container">
+                <div class="icon-item">
+                    <i class="far fa-heart"></i>
+                    <span>Mis Favoritos</span>
+                </div>
+                <div class="icon-item">
+                    <i class="fas fa-user"></i>
+                    <span>Mi Cuenta</span>
+                </div>
+                <div class="icon-item">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>Mi Carrito</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="product-layout">
+            <div class="image-column">
+                <img alt="Imagen de Parches Iluminadores para el Contorno de Ojos"
+                     class="product-image"
+                     src="https://storage.googleapis.com/a1aa/image/BOKveqBc5qMOtiBJNgNwrOubyTCIWoep7aZ6Cn6snLM.jpg"/>
+            </div>
+
+            <div class="info-column">
+                <h1 class="product-title">Parches Iluminadores para el Contorno de Ojos</h1>
+                <p class="product-units">60UDS.</p>
+                <div class="price-container">
+                    <p class="main-price">15,50 €</p>
+                    <p class="product-units">Sale: 0,26 €/ud.</p> </div>
+
+                <div class="product-description">
+                    <p class="description-text">
+                        Parches iluminadores para el contorno de ojos de natura siberica. 60 Parches para ojos con efecto iluminador que hidratan la piel del contorno, le devuelven la vitalidad y mejoran su protección para mantenerla joven.
+                    </p>
+                    <p class="description-text">
+                        Estos parches iluminadores son una solución rápida y cómoda para darle a tu piel ese toque de luz y vitalidad que necesita y a la vez urbanas se van quitando. Con su base de un activo polipeptídico activo y extractos fermentados de mora de los pantanos y frambuesa silvestre ayudan al microbioma de la piel a mantener su equilibrio y mejorar su luminosidad. La eficacia presente en su fórmula mejora el tono y la textura de tu contorno para ayudar a reducir arrugas, líneas de expresión y la hinchazón. La combinación de ingredientes hidratantes de la epidermis, dando lugar a un resultado suave, esplendoroso y rejuvenecido.
+                    </p>
+                </div>
+
+                <div class="actions-container">
+                    <div class="quantity-selector">
+                        <button class="quantity-button">-</button>
+                        <input class="quantity-input" type="text" value="1"/>
+                        <button class="quantity-button">+</button>
+                    </div>
+                    <button class="add-to-cart-button">
+                         <i class="fas fa-cart-plus cart-icon-button"></i> Añadir al carrito
+                     </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
